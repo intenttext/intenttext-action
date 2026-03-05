@@ -30,7 +30,7 @@ async function run(): Promise<void> {
 
   // Filter ignored paths
   const filesToCheck = files.filter(
-    (f) => !ignorePatterns.some((pattern) => minimatch(f, pattern))
+    (f) => !ignorePatterns.some((pattern) => minimatch(f, pattern)),
   );
 
   if (filesToCheck.length === 0) {
@@ -58,7 +58,7 @@ async function run(): Promise<void> {
     // Determine pass/fail
     const hasParseErrors = parseResult.errors.length > 0;
     const hasValidationErrors = validation.issues.some(
-      (i) => i.type === "error"
+      (i) => i.type === "error",
     );
     const hasWarnings =
       parseResult.warnings.length > 0 ||
@@ -107,7 +107,7 @@ async function run(): Promise<void> {
     const status = passed ? "✓" : "✗";
     const issueCount = result.validationIssues.length + result.parseErrors;
     core.info(
-      `  ${status} ${filePath}${issueCount > 0 ? ` (${issueCount} issues)` : ""}`
+      `  ${status} ${filePath}${issueCount > 0 ? ` (${issueCount} issues)` : ""}`,
     );
   }
 
@@ -132,23 +132,21 @@ async function run(): Promise<void> {
       ...results.map((r) => [
         r.path.replace(process.cwd() + "/", ""),
         r.passed ? "✅ Passed" : "❌ Failed",
-        r.validationIssues
-          .filter((i) => i.type === "error")
-          .length.toString(),
+        r.validationIssues.filter((i) => i.type === "error").length.toString(),
         r.validationIssues
           .filter((i) => i.type === "warning")
           .length.toString(),
       ]),
     ])
     .addRaw(
-      `\n**${filesToCheck.length} file(s) checked · ${totalIssues} total issues**`
+      `\n**${filesToCheck.length} file(s) checked · ${totalIssues} total issues**`,
     )
     .write();
 
   if (!allPassed) {
     core.setFailed(
       `${failedFiles.length} of ${filesToCheck.length} file(s) failed validation.\n` +
-        failedFiles.map((f) => `  - ${f.path}`).join("\n")
+        failedFiles.map((f) => `  - ${f.path}`).join("\n"),
     );
   } else {
     core.info(`\n✓ All ${filesToCheck.length} file(s) passed.`);

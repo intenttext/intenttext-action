@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: intenttext/intenttext-action@v1
         with:
-          path: 'workflows/**/*.it'
+          path: "workflows/**/*.it"
           strict: false
           annotate: true
 ```
@@ -40,20 +40,20 @@ jobs:
 
 ## Inputs
 
-| Input | Description | Default |
-|---|---|---|
-| `path` | Glob pattern for .it files | `**/*.it` |
-| `strict` | Fail on warnings too | `false` |
-| `ignore` | Patterns to ignore (comma-separated) | `node_modules/**` |
-| `annotate` | Add inline PR annotations | `true` |
+| Input      | Description                          | Default           |
+| ---------- | ------------------------------------ | ----------------- |
+| `path`     | Glob pattern for .it files           | `**/*.it`         |
+| `strict`   | Fail on warnings too                 | `false`           |
+| `ignore`   | Patterns to ignore (comma-separated) | `node_modules/**` |
+| `annotate` | Add inline PR annotations            | `true`            |
 
 ## Outputs
 
-| Output | Description |
-|---|---|
+| Output          | Description               |
+| --------------- | ------------------------- |
 | `files_checked` | Number of files validated |
-| `issues_found` | Total issues found |
-| `valid` | `true` if all passed |
+| `issues_found`  | Total issues found        |
+| `valid`         | `true` if all passed      |
 
 ## What gets validated
 
