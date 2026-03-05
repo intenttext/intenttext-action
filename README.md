@@ -1,5 +1,7 @@
 # IntentText Validate
 
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-IntentText%20Validate-blue?logo=github)](https://github.com/marketplace/actions/intenttext-validate)
+
 GitHub Action to validate [IntentText](https://github.com/intenttext/IntentText) (`.it`) workflow and document files in CI.
 
 **What is IntentText?** A human-readable structured document format where every line is a typed keyword block (`step:`, `gate:`, `decision:`, `task:`, etc.) with pipe-separated properties. Used for writing agentic workflows, structured documents, and print-ready publications — all in plain text.
