@@ -27,6 +27,16 @@ inputs:
     required: false
     default: 'true'
 
+  verify:
+    description: 'Verify sealed .it files have not been tampered with. Default: false'
+    required: false
+    default: 'false'
+
+  verify-pattern:
+    description: 'Glob pattern for files to verify (default: **/*.it)'
+    required: false
+    default: '**/*.it'
+
 outputs:
   files_checked:
     description: 'Number of .it files validated'

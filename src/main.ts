@@ -5,6 +5,7 @@ import { minimatch } from "minimatch";
 import {
   parseIntentTextSafe,
   validateDocumentSemantic,
+  verifyDocument,
 } from "@intenttext/core";
 import type { SemanticIssue } from "@intenttext/core";
 
@@ -150,6 +151,44 @@ async function run(): Promise<void> {
     );
   } else {
     core.info(`\n✓ All ${filesToCheck.length} file(s) passed.`);
+  }
+
+  // ── Verify sealed documents ──────────────────────────────
+  const shouldVerify = core.getInput("verify") === "true";
+  if (shouldVerify) {
+    const verifyPattern = core.getInput("verify-pattern") || "**/*.it";
+    const verifyGlobber = await glob.create(verifyPattern);
+    const verifyFiles = await verifyGlobber.glob();
+    const verifyFilesToCheck = verifyFiles.filter(
+      (f) => !ignorePatterns.some((pattern) => minimatch(f, pattern)),
+    );
+
+    let verifyFailed = false;
+    for (const filePath of verifyFilesToCheck) {
+      const source = readFileSync(filePath, "utf-8");
+      const result = verifyDocument(source);
+
+      if (result.frozen) {
+        if (result.intact) {
+          core.info(`  ✅ Verified: ${filePath}`);
+        } else {
+          core.error(
+            `TAMPERED: ${filePath} — ${result.error ?? "integrity check failed"}`,
+            {
+              file: filePath,
+              title: "IntentText: Document tampered",
+            },
+          );
+          verifyFailed = true;
+        }
+      }
+    }
+
+    if (verifyFailed) {
+      core.setFailed(
+        "One or more sealed documents failed integrity verification.",
+      );
+    }
   }
 }
 
