@@ -50,14 +50,14 @@ jobs:
 
 ## Inputs
 
-| Input            | Description                                        | Default           |
-| ---------------- | -------------------------------------------------- | ----------------- |
-| `path`           | Glob pattern for .it files                         | `**/*.it`         |
-| `strict`         | Fail on warnings too                               | `false`           |
-| `ignore`         | Patterns to ignore (comma-separated)               | `node_modules/**` |
-| `annotate`       | Add inline PR annotations                          | `true`            |
+| Input            | Description                                          | Default           |
+| ---------------- | ---------------------------------------------------- | ----------------- |
+| `path`           | Glob pattern for .it files                           | `**/*.it`         |
+| `strict`         | Fail on warnings too                                 | `false`           |
+| `ignore`         | Patterns to ignore (comma-separated)                 | `node_modules/**` |
+| `annotate`       | Add inline PR annotations                            | `true`            |
 | `verify`         | Verify integrity of sealed (frozen/signed) documents | `false`           |
-| `verify-pattern` | Glob for files to verify                           | `**/*.it`         |
+| `verify-pattern` | Glob for files to verify                             | `**/*.it`         |
 
 ## Outputs
 
