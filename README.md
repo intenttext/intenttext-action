@@ -40,14 +40,24 @@ jobs:
     strict: true
 ```
 
+### With document integrity verification
+
+```yaml
+- uses: intenttext/intenttext-action@v1
+  with:
+    verify: true
+```
+
 ## Inputs
 
-| Input      | Description                          | Default           |
-| ---------- | ------------------------------------ | ----------------- |
-| `path`     | Glob pattern for .it files           | `**/*.it`         |
-| `strict`   | Fail on warnings too                 | `false`           |
-| `ignore`   | Patterns to ignore (comma-separated) | `node_modules/**` |
-| `annotate` | Add inline PR annotations            | `true`            |
+| Input            | Description                                        | Default           |
+| ---------------- | -------------------------------------------------- | ----------------- |
+| `path`           | Glob pattern for .it files                         | `**/*.it`         |
+| `strict`         | Fail on warnings too                               | `false`           |
+| `ignore`         | Patterns to ignore (comma-separated)               | `node_modules/**` |
+| `annotate`       | Add inline PR annotations                          | `true`            |
+| `verify`         | Verify integrity of sealed (frozen/signed) documents | `false`           |
+| `verify-pattern` | Glob for files to verify                           | `**/*.it`         |
 
 ## Outputs
 
@@ -66,11 +76,13 @@ Checks run on every `.it` file:
 - **Required properties** — `gate:` has `approver:`, workflow blocks have expected fields
 - **Duplicate IDs** — no two blocks share the same explicit `id:`
 - **Variable references** — `{{variables}}` are declared in `context:` or produced by steps
+- **Trust integrity** — when `verify: true`, checks that frozen/signed documents haven't been tampered with
 
-See the [IntentText documentation](https://github.com/intenttext/IntentText) for the full spec.
+See the [IntentText documentation](https://itdocs.vercel.app) for the full spec.
 
 ## Links
 
-- [IntentText Spec](https://github.com/intenttext/IntentText/blob/main/docs/SPEC.md)
+- [IntentText Docs](https://itdocs.vercel.app)
 - [IntentText Core](https://www.npmjs.com/package/@intenttext/core)
 - [IntentText MCP Server](https://www.npmjs.com/package/@intenttext/mcp-server)
+- [IntentText Python](https://pypi.org/project/intenttext/)
