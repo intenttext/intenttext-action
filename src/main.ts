@@ -51,7 +51,7 @@ async function run(): Promise<void> {
     const source = readFileSync(filePath, "utf-8");
 
     // Parse safely — collect warnings
-    const parseResult = parseIntentTextSafe(source, { strict: false });
+    const parseResult = parseIntentTextSafe(source);
 
     // Semantic validation
     const validation = validateDocumentSemantic(parseResult.document);
